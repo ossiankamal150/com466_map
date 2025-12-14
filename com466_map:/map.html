@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Interactive Map</title>
+
+  <!-- Leaflet CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Leaflet JS -->
+  <script 
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <style>
+    .leaflet-popup-content img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
+}
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    height: 100vh;   /* full browser height */
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<h2>  Perils, Exploitation and Death: the Trans-Saharan Migration Route  </h2>
+<div id="map"></div>
+
+<script>
+  // Create the map
+  var map = L.map('map').setView([51.505, -0.09], 13);
+
+  // Add  tiles
+
+  // Satellite imagery
+var satellite = L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  {
+    attribution: 'Tiles © Esri'
+  }
+);
+
+// Borders + labels (transparent)
+var borders = L.tileLayer(
+  'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  {
+    attribution: 'Borders © Esri',
+    pane: 'overlayPane'
+  }
+);
+
+// Add both to map
+satellite.addTo(map);
+borders.addTo(map);
+
+
+// Center the map over the Sahara Desert
+var saharaLatLng = [19.888481, 7.501386]; // approximate center
+map.setView(saharaLatLng, 4); // zoom level 4
+
+// Add a popup without a marker
+
+L.popup({
+  maxWidth: 400,
+  minWidth: 300,
+  maxHeight: 200,
+  closeOnClick: false,
+  autoClose: false 
+})
+.setLatLng(saharaLatLng)
+.setContent(`
+  <b>Welcome!</b>
+
+  <p>
+    This is a map showing one of many migration routes across Africa.
+    The map includes pop-up windows, and the reader is encouraged to
+    explore each window, starting in the West and moving East and North.
+  </p>
+
+  <p>
+    Essays, quotes, and imagery aim to contextualize various unique legs
+    of the journey. This project is by no means a comprehensive representation of migration
+    flows and the migration experience. Instead, it is an overview of what
+    one migration route through Africa may look like and the dynamics
+    that shape it.
+  </p>
+
+<p> </p>
+<p> </p>
+<p> </p>
+<p> **************************************** </p>
+
+<p> AI Disclaimer: ChatGPT has been used to code the infrastructure for this website. This was verbally approved by Professor Haralambous during a Zoom meeting on December 4, 2025. All other work is my own, unless otherwise stated. /s/ Ossian Kamal, December 13, 2025
+  </p>
+
+  <p>
+    This represents my own work in accordance with University regulations. /s/ Ossian Kamal, December 13, 2025
+    </p>
+`)
+.openOn(map);
+
+
+
+
+
+
+// SENEGAL 
+
+
+// Add a marker
+  var marker = L.marker([14.7167, -17.4677]).addTo(map);
+
+  // Add a popup
+  marker.bindPopup(
+  `
+  <div class="senegal-popup">
+    <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+    <b>Extractive Colonialism Relived: Exploitation of Senegalese Waters</b><br></p>
+
+    <p>Situated on the Cape Verde peninsula on the Atlantic coast, Dakar hosts one of the most important harbors in West Africa. Once the hub of French West Africa, the bustling city now serves an important purpose in the country’s fishing industry. Although Senegal gained independence in 1960, colonial legacies still live on, both culturally and economically (Hargreaves et al.). Some aspects of French colonialism are obvious. After all, French remains the official language. Less obvious, however, might be the economic channels in which France and other European countries continue to extract and deplete resources from Senegal, making the Senegalese pay the price. Ultimately, the modern-day colonialism in Senegal is not much different the one before 1960 – Europe takes, exploits, and controls. The Senegalese pay, move, and suffer.</p>
+
+    <p>Small-scale fishing has long sustained low-income consumers in Senegal and neighboring countries. The rich and biologically diverse Atlantic waters off the Saharan coast are also home to valuable catch, such as tuna, squid, octopus and squid. Today, fish products are the most valuable export in Senegal. However, for locals, fishing has become an increasingly more challenging method to earn a living, with decades-long exploitation of Senegalese waters depleting fish stock. In 1980, Senegal declared an Exclusive Economic Zone along its coast. The country unsuccessfully tried to develop its own fishing industry, and foreign fisheries instead exploited its waters (Pauly et al.; Hutchins; Hargreaves et al.; McVeigh).</p>
+
+    <p>European commercial fishing vessels started fishing in Senegalese waters in the 1950s, and since then, foreign distant-water fishing vessels have taken over 50% of the catch in Senegal’s Exclusive Economic Zone. As a result, most of the high-value fish and invertebrate stocks along the West-African coast are declining, and the catch is being exported elsewhere (Hutchins; Sahara Chronicle). Today, it is close to impossible for local low-income fishers to sustain themselves through small-scale fishing. European fishing vessels extract resources, leaving local populations scrambling to make ends meet. With a dying fishing industry, many young Senegalese search for work elsewhere. For many, migration to Europe seems like the best option (McVeigh; Hutchins).</p>
+
+        <img src="https://cdn.oceanographicmagazine.com/wp-content/uploads/2025/07/22115219/E-Diop-1920x1440.jpg" width="200"><br>
+     <small style="color:#555;"> Traditional Senegalese fishing boats, pirogues, can't compete with industrial foreign fishing vessles (Hutchins).</small>
+
+    <p>Many young Senegalese are persuaded by promises and allures of a better life further north. Friends, family and acquaintances who make it to Europe often encourage young Senegalese to leave Africa and migrate to Europe. However, those allured by the promises of Europe don’t hear the stories from the thousands of migrants who die on their way there. Historically, many of the migrants have been young men, but now more women and children are setting off, too. Information campaigns funded by outside entities, such as European governments and the EU commission, have aimed to inform migrants about the dangers of migration. However, despite such efforts, pride, peer pressure, and false hopes still motivate tens of thousands of annual departures. Many Senegalese leave their homes, aware of dangers, risks and potential death. Emigration is key policy issue in Senegal, and one of the hottest topics in the 2024 election. For the newly elected president, Bassirou Diomaye Faya, the exodus of young Senegalese has been a top policy priority, but with little result (Tjaden; McVeigh; Munoz et al.).</p>
+
+    <p>Despite efforts by the Senegalese government to curb migration, the real issue is at sea, with the modern-day colonial exploitation in Senegalese waters. European exploitation and extraction are nothing new. Although Senegal officially gained independence from France in 1960, the West-African country is still struggling to liberate itself from the colonial legacies of France. European countries such as France still have a tight grip on Senegal’s most valuable natural resources. It's a modern form of extractive colonialism, pushing its victims to embark on life-threatening journeys based on false hopes (Hutchins; McVeigh).</p>
+
+    <p>France’s and other European countries’ grip around Senegal’s most important natural resource is reminiscent of Frantz Fanon’s theory of postcolonial economic dependence. In The Wretched of the Earth, published in 1961, Fanon hypothesized that newly liberated colonial states would be unable to rebuild their economies independently. The departure of the colonizer would also mark the departure of much vital infrastructure and capital, thus making economic growth challenging. Ultimately, the former colony would need to engage in the economic channels maintained by the colonizer, thus never fully gaining independence from the former colonizer (Fanon). The pattern is clear – Senegal gains independence, establishes the Economic Exclusive Zone two decades later, and now suffers from former colonizers’ extraction of natural resources. What Fanon wrote in 1961 about colonial economic infrastructure thus seems to hold true today: “The economic infrastructure is also a superstructure. The cause is effect: You are rich because you are white, you are white because you are rich” (5). Today, Senegal is officially independent from France. In reality, however, colonialism didn’t stop after 1960, but is alive and well today, too.</p>
+
+    <p>Senegal’s scarce fish resources are believe to be one of the key drivers of migration from Senegal to Europe (Pauly et al.). As we will see later in the migration route mapped out, European policies and colonial practices will keep haunting migrants along their journey east and north. Although migration policy in the EU goes beyond the scope of the present project, we can be sure that the welcome to Europe is a cold one. Pushed to leave their homes, mistreated, exploited, abused throughout their journey, and hardly welcome in Europe. In a sense, the migrant can’t win – neither at home nor abroad.</p>
+    
+    
+    <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">  
+    <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Fanon, Frantz. The Wretched of the Earth. Grove Press, 1961.
+    </p>
+
+    <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Hargreaves, John D., et al. “Senegal.” Encyclopedia Britannica, 3 Dec. 2025,
+    <a href=https://www.britannica.com/place/Senegal target="_blank">
+    https://www.britannica.com/place/Senegal
+      </a>
+    </p>
+
+    <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Hutchins, Rob. “EU Overfishing Is Fuelling Senegal’s Deadly Migration.” Oceanographic, 22 July 2025, 
+    <a href=https://oceanographicmagazine.com/news/eu-s-overfishing-is-fuelling-senegal-s-deadly-migration/ target="_blank">
+    https://oceanographicmagazine.com/news/eu-s-overfishing-is-fuelling-senegal-s-deadly-migration/
+      </a>
+    </p>
+
+    <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    McVeigh, Tracy. “‘Barcelona or Death’: Mothers Watch and Wait as Senegal’s Men Risk All to Reach Europe.” The Guardian, 7 Apr. 2025. Global Development. The Guardian, 
+    <a href=https://www.theguardian.com/global-development/2025/apr/07/barcelona-or-death-mothers-watch-and-wait-as-senegals-men-risk-all-to-reach-europe target="_blank">
+    https://www.theguardian.com/global-development/2025/apr/07/barcelona-or-death-mothers-watch-and-wait-as-senegals-men-risk-all-to-reach-europe
+      </a>
+    </p>
+
+
+    <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Munoz, Blanca, et al. ‘Try or Die’ - One Senegalese Man’s Determination to Reach Europe. 13 Oct. 2024,
+    <a href=https://www.bbc.com/news/articles/c4g957x3g49o target="_blank">
+    https://www.bbc.com/news/articles/c4g957x3g49o
+      </a>
+    </p>
+
+     <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Pauly, Daniel, et al. “From Science to Conscience: The Plunder of Senegal’s Fisheries Resources, or Europe’s Role in the Making of a Migration Crisis.” Proceedings of the Paris Institute for Advanced Study, vol. 21, no. undefined, Feb. 2025. paris.pias.science, 
+    <a href=https://doi.org/10.5281/zenodo.15833918 target="_blank">
+    https://doi.org/10.5281/zenodo.15833918
+      </a>
+    </p>
+
+     <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Sahara Chronicle. Directed by Ursula Biemann, 2021. Vimeo,
+    <a href=https://vimeo.com/534312667 target="_blank">
+    https://vimeo.com/534312667
+      </a>
+    </p>
+
+  </div>
+  `,
+  {
+    className: "senegal-popup-container",
+    maxWidth: 500,
+    minWidth: 100,
+    maxHeight: 900,
+    autoPan: true
+  }
+)
+
+
+
+
+// BUS RIDE
+
+12.300861, -5.617987
+
+  // Add a marker
+  var marker = L.marker([12.300861, -5.617987]).addTo(map);
+
+  // Add a popup
+    marker.bindPopup(`
+      <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Migrants and Their Role as Pawns in Illegal Economies</b><br>
+
+  <p> The Economic Community of West African States (ECOWAS) allows free movement of persons between member states, facilitating easy travel in the region. The first leg of the migration journey is often a bus ride, booked through a commercial bus company. (Molenaar and El Kamouni-Janssen). Companies such as Rimbo Transport Voyageurs offer bus journeys within an extensive network of routes between various large cities in West Africa. Tickets are easily booked through a modern website (RTV - Home). </p>
+
+  <p> Since many migrants are either unwilling or unable to provide travel documentation as they enter new countries along this route, their travel technically becomes illicit. Migrants are therefore often forced to pay bribes to security forces and police officers at check points (Molenaar and El Kamouni-Janssen; “The Perilous Migration across the Desert of Niger”). These bribes demonstrate one important attribute of the migratory journey: exploitation. As will become evident in the mapped-out route, the journey from West Africa to Europe is largely characterized by exploitation of migrants. Extortion, forced labor, and sexual abuse are some of the many horrors endured by migrants along their journey north.  </p>
+
+  <p> While the migration route from Senegal to Libya often is perceived as a one-way journey, it is important to remember that many travel the opposite direction, too. Migrants who venture north to Algeria and Libya and struggle to find stable long-term work or are unable to continue their journey to Europe often return to their home. Sometimes by choice, sometimes by forced repatriation (Sengupta; “Libya’s Dark Web of Collusion”). Understanding such return migration helps contextualize trans-African migration. The migratory journey is not simply one streamlined process of getting from West Africa to Europe. Many migrants don’t go further than to Niger or Libya. Not because they don’t want to, but because migrating to Niger or Libya is a perilous and long journey in itself. In fact, most West African migrants stay on the African continent (Molenaar and El Kamouni-Janssen). </p>
+
+  <p> Although many migrants are forced to pay to pass check points on these bus rides, the most significant crime committed along these routes is not small bribes. The bus companies themselves often operate under the protection of corrupt state officials. For the unassuming traveler, bus operators like Rimbo Transport Voyageurs appear legitimate. Under the surface, the reality is much different. The owner of Rimbo Transport Voyageurs, Mohamed Rhissa Ali, has close ties to Nigerien political elites and is one of the President’s main donors. His collusive ties to high-ranking officials have proved helpful, especially when he was caught crossing the Nigerien border with $15 million in cash, or when his name appeared in the Panama Papers. 3STV, another Nigerien bus operator, was previously owned by Elhadj Chérif Ould Abidine, better known as Chérif Cocaine. He was the kingpin in a trans-Saharan cocaine smuggling network, and a close ally of the former President of Niger (Molenaar and El Kamouni-Janssen). </p>
+
+  <p> The vast transportation networks within these bus companies facilitate their illegal activity. However, these companies rely on paying customers, of which migrants make up an important part. Although the bus rides through Western Africa are likely the safest and most risk-free segments of the migration journey, they highlight an important attribute of trans-Saharan migration: migrants are pawns in larger criminal networks. The individual migrant – sometimes knowingly, sometimes not – plays an important part in large, complex, illegal economies that are either sanctioned by corrupt state officials or operate outside of the purview of any proper government. As a result, the trans-Saharan migratory journey is characterized by exploitation of migrants. As migrants move further east and north, exploitation by criminal networks not only characterize the journey, but they become the journey itself. </p>
+
+
+ <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">  
+<ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  “Libya’s Dark Web of Collusion: Abuses against Europe-Bound Refugees and Migrants.” Amnesty International, 11 Dec. 2017, 
+  <a href="https://www.amnesty.org/en/documents/mde19/7561/2017/en/." target="_blank" > https://www.amnesty.org/en/documents/mde19/7561/2017/en/. </a>
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Molenaar, Fransje, and Floor El Kamouni-Janssen. Turning the Tide: The Politics of Irregular Migration in the Sahel and Libya. Clingendael Netherlands Institute of International Relations, Feb. 2017, 
+    <a href= "https://www.clingendael.org/pub/2017/turning_the_tide/." target="_blank"> https://www.clingendael.org/pub/2017/turning_the_tide/. </a>
+    </p>
+
+  
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  RTV - Home.
+  <a href="https://rimbortv.net/accueil" target="_blank"> https://rimbortv.net/accueil </a>
+  Acessed 13 Dec. 2025. </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Sengupta, Somini. “Heat, Hunger and War Force Africans Onto a ‘Road on Fire.’” The New York Times, 15 Dec. 2016. World. NYTimes.com, 
+    <a href= "https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html" target="_blank"> https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html </a>
+    </p>
+
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  “The Perilous Migration across the Desert of Niger: Africa’s Hidden Story.” Oxfam International, 25 May 2022, 
+  <a href="https://www.oxfam.org/en/perilous-migration-across-desert-niger-africas-hidden-story" target="_blank"> https://www.oxfam.org/en/perilous-migration-across-desert-niger-africas-hidden-story </a>
+  </p>
+
+
+`
+  , {
+  maxWidth: 500,  // maximum width in pixels
+  minWidth: 100,  // minimum width
+  maxHeight: 900, // maximum height
+  autoPan: true   // map will pan if popup is off-screen
+})
+
+
+
+// Rimbo Transport Voyageurs
+
+  // Add a marker
+  var marker = L.marker([13.5116, 2.1254]).addTo(map);
+
+  // Add a popup
+    marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Rimbo Transport Voyageurs</b><br>
+ 
+  <p>Migrants often start their journey on a bus. Proefessional bus operators, like Rimbo Transport Voyageurs, offer services from many West African cities to Agadez.</p><br>
+
+  <div style="text-align:left;">
+    <img src="bus.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> Image source: <a href=https://rimbortv.net/accueil target="_blank">
+      https://rimbortv.net/accueil
+    </a> </small>
+  </div>
+
+  <p> Rimbo Transport Voyageurs was founded in 2003 by Rhissa Ali Mohamed. RTV has been vastly succesful in the trans-Saharan transportation industry, but it's not entirely clear whether all activity is legal or not. Ali Mohamed has close, collusive ties to the political elite in Niger. These have proved helpful when he was caught smuggling cash out of the country and when his offshore accounts were revealed in the Panama Papers (Molenaar and El Kamouni-Janssen).</p>
+
+  <p> </p>
+
+  <div style="text-align:left;">
+    <img src="about.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> Image source: <a href=https://rimbortv.net/apropos target="_blank">
+      https://rimbortv.net/apropos
+    </a> </small>
+  </div>
+
+
+ <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">  
+<ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+  <p style="margin:0 0 0 6.em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Molenaar, Fransje, and Floor El Kamouni-Janssen. Turning the Tide: The Politics of Irregular Migration in the Sahel and Libya. Clingendael Netherlands Institute of International Relations, Feb. 2017,
+    <a href=https://www.clingendael.org/pub/2017/turning_the_tide/. target="_blank">
+      https://www.clingendael.org/pub/2017/turning_the_tide/. 
+    </a>
+  </p>
+
+
+   <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    RTV - About.,
+    <a href=https://rimbortv.net/apropos target="_blank">
+      https://rimbortv.net/apropos
+    </a>.
+  Accessed 13 Dec. 2025.
+  </p>
+
+  <p style="margin:0; padding-left:1.5em; text-indent:-1.5em;">
+    RTV - Home.,
+    <a href=https://rimbortv.net/accueil target="_blank">
+      https://rimbortv.net/accueil
+    </a>.
+  Accessed 13 Dec. 2025.
+  </p>
+   
+
+  
+    </div>
+`
+  , {
+  maxWidth: 500,  // maximum width in pixels
+  minWidth: 100,  // minimum width
+  maxHeight: 900, // maximum height
+  autoPan: true   // map will pan if popup is off-screen
+})
+
+
+
+
+
+
+//AGADEZ
+
+
+  // Add a marker
+  var marker = L.marker([16.9742, 7.9865]).addTo(map);
+
+  // Add a popup
+ marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b>Agadez: Hub for Transportation or Smuggling?</b><br>
+  <p>  </p>
+  <b>“I want to make money because we live on migrants, only on migrants.”</b> (Simoncelli).</b><br>
+  – Ousmane Kouyate, Agadez passeur, 2024 </p>
+
+  <p> While Agadez is commonly portrayed as a place of transit, it is important to note that many migrants stay in the town for extended periods of time or even settle down there. Many of those who now earn a living by facilitating migration through Agadez were also once migrants who either stayed, or returned to Agadez (Io Capitano; Sengupta; “The Perilous Migration across the Desert of Niger”). Understanding the dynamics of movement through Agadez is essential to contextualize it as the important migration hub it has grown to be. As highlighted on the first leg of the journey – the bus ride through West Africa – migration is not simply a journey from A to B. On the contrary, many migrants who move through Africa do so in a circular fashion, searching for work wherever they can find it (Molenaar and El Kamouni-Janssen).</p>
+
+  <p> For most of the hundreds of thousands of migrants passing through Agadez, the goal is to continue the journey north, either to Northern Africa or Europe. The city is a marketplace, where many people engage in the economy of transportation, supported by the constant flow of migrants. Migrants, often desperate for a better life outside of their home countries, make up the consumers of this economy. Hostel owners, pickup truck drivers, sex workers, peddlers, and other actors make up the supply side of the economy. Somewhere in between are the corrupt police officers and other officials, who extract from the consumer without providing anything in return (Sengupta). </p>
+
+  <p>One of the most important actors in the Agadez marketplace, besides the consumer migrant, is the transporter. The choice to use the word transporter is a deliberate one, and it allows us to analyze and problematize more neutrally the character often portrayed as a smuggler in Western mass media. In this essay, the transporter encapsulates all people active in the chain of events between the migrant’s arrival in Agadez to her departure. That includes the “passeur,” “coxeur,” “chef de ghetto,” hostel owner, and the truck driver with whom the migrant ultimately leaves (Hoffmann et al.).* </p>
+
+  <p> When migrants arrive in Agadez, many actively seek out a transporter. Sometimes the migrant is approached by salesmen, offering deals for transportation northward (Io Capitano). Supported by resources pooled by their family, often from the sale of cattle and depletion of saving accounts, many young migrants feel like they can’t turn back home. The urge and desperation to keep moving north often results in eager transactions with transporters. Some depictions portray the transporters as scammers, where migrants’ gullibility is exploited to extract as much money as possible. In some cases, migrants live in ghettos for weeks or months, hidden from the rest of the public until their departure (Io Capitano; “The Perilous Migration across the Desert of Niger”). Other accounts tell vastly different stories, with hostel owners hosting celebrations and feasts for the migrants on the night before their departure (Sengupta). </p>
+
+  <p> Looking past the potential exploitative and extractive nature of the transporters, the transaction between the migrant and transporter is, at its core, a purely economic one. Although a certain extent of information asymmetry between the migrant and transporter certainly exists, it is important to remember that the migrant is not clueless. Firstly, the migrant does not live in an information vacuum, completely detached from the realities of migration (Directorate-General for Migration and Home Affairs (European Commission) et al.). Secondly, the migrant arrives in Agadez with the purpose and aim of identifying and purchasing transportation northward (Simoncelli). The transporter’s service is neither something completely foreign nor something that is imposed upon the migrant. It is an economic transaction where the migrant demands a service that the transporter can provide. Analyzing the migrant-transporter transaction in purely economic terms may seem harsh, as it strips the human element from the analysis. Although such an accusation of inhumanity may have some merit – after all, the migrant is often scammed and mistreated by transporters – it is important to consider the migrant’s view of the transporter. For the migrant, the transporter may be understood as an enabler, offering a highly sought after and potentially life-changing service. </p>
+
+  <p> Taking on the perspective of the transporter may also offer more nuance to the dynamics of the transactions that take place in the Agadez marketplace. The Tuareg, a nomadic ethnic group making up 10% of Niger’s population and mainly concentrated in the country’s northern desert regions, largely control the transportation business in Agadez and the nearby regions. After a 1995 rebellion, the Tuareg were granted legal permission to transport people north to Algeria and Libya. With declining tourism and dwindling opportunities for traditional trades, this right enabled the Tuareg to expand the economy of transportation. The Tuareg transportation organizations play a vital role in the local economy. In addition to the thousands of jobs directly linked to the transportation business, the flow of migrants also creates business opportunities for local store owners, small-scale manufacturers, and artisans(Hoffmann et al.). However, the Tuaregs’ contribution to the local economy is not done with clean hands. The Tuareg and other tribes maintain links to corrupt state officials and various criminal groups in the region, enabling them to engage in drug smuggling. With limited resources, the central government rarely intercepts or prevents collusion between state officials and non-state actors. Characters such as Chérif Cocaine, the drug lord and Nigerien politician mentioned in the previous essay, act as links between rebellious Tuareg groups and political elites. Such links are essential in enabling the Tuaregs’ trans-Saharan drug smuggling. Considering the Tuareg’s illicit activities, one arrives at a moral dilemma. On the one hand, the transportation business creates jobs for thousands of people in a country with otherwise few opportunities for legal livelihoods. On the other hand, the aforementioned opportunities arise from illegal activity, such as drug smuggling (Hoffmann et al.; Felbab-Brown; de Andrés et al.). </p>
+
+  <p> Although the Tuareg often operate illegally, or at least in a legal grey zone, their activates in the region fuel the local economy. The transportation business’ importance become evident in 2015, when Niger implemented an anti-smuggling law with pressure from the EU. The law had impactful consequences for Agadez. By making migrant transportation illegal, it hampered the economic growth fueled by the transportation business through Agadez up until that point. In response to the law, migrants and transporters instead operated clandestinely along alternative routes and smaller towns. One of the most devastating effects of the law was the increased migrant deaths along the transportation routes. By moving in smaller groups and not stopping along the route, transporters reduced the risk of getting caught by authorities. However, this also meant that if migrants fell off the back of a truck, no one would stop to pick them up and they would be left to die in the desert. Thus, the law didn’t stop the transportation of migrants. Instead, it only made life harder for the the local population of Agadez and migration more deadly for the migrants. The law was repealed in 2023, again legalizing transportation of migrants through the city and beyond. Since then, the city’s economic activity has boomed. As journalist Simoncelli puts it, “Agadez has begun to live again” (Simoncelli; Hoffmann et al.; de Andrés et al.). </p>
+
+  <p> The anti-smuggling law of 2015 is the first example of EU intervention in trans-Saharan migration along the mapped-out migration route. As will become evident in Libya, EU involvement in migration policy in Northern Africa is only a way to make other states carry out their migration policy. By doing this, EU members can keep their hands clean, while others act on their behalf (see Libya essay). </p>
+
+  <p> By viewing the business of transportation from both the migrant’s and transporter’s perspective, we understand that labeling the business of transportation as smuggling may lack nuance, and perhaps even employ a savior complex. We must ask ourselves, how do migrants understand the transporters, and what role do transportation services play in a larger economic system? For the migrants, transporters offer a sought-after service and a potential path toward a new life. For the transporters, migrants display consumer demand, creating economic opportunity for an entire region. Perhaps, us onlookers in the West don’t have the full picture or perspective on the business of transportation. Labelling transporters as smugglers and their services as smuggling may very well satisfy our connotations and understanding of trans-Saharan migration but overlook the perspective of migrants and transporters themselves. </p>
+
+  <p><small style>  * As tourism in Agadez declined following the Tuareg rebellion between 2007-2009, former tour guides, hostel owners, chauffeurs, and travel agents repurposed their businesses to accommodate the growing economy of transportation fueled by increasing migration flows across the Sahara. Travel agents and business owners became “passeurs,” their employees became “chef de ghettos,” managing the migrant hostels and lodging, and “coxeurs,” ushering the newly arrived migrants and connecting them to the appropriate transporters (Hoffmann et al.). </small style></p>
+
+  <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+
+  <ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    de Andrés, Amado Philip, et al. <em>Drug Trafficking in the Sahel</em>. United Nations Office on Drugs and Crime, 2024, 
+    <a href=https://www.britannica.com/place/Senegal target="_blank">
+    https://www.britannica.com/place/Senegal
+      </a>
+    </p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+ Directorate-General for Migration and Home Affairs (European Commission), et al. <em>How West African Migrants Engage with Migration Information En-Route to Europe</em>. Publications Office of the European Union, 2018, <a href="https://data.europa.eu/doi/10.2837/97937" target="_blank">https://data.europa.eu/doi/10.2837/97937 </a>.
+</p>
+
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  Felbab-Brown, Vanda. “In the Eye of the Storm: Niger and Its Unstable Neighbors.” Brookings, 17 June 2017 <a href="https://www.brookings.edu/articles/in-the-eye-of-the-storm-niger-and-its-unstable-neighbors/" target="_blank">https://www.brookings.edu/articles/in-the-eye-of-the-storm-niger-and-its-unstable-neighbors/</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  Hoffmann, Anette, et al. <em>Migration and Markets in Agadez: Economic Alternatives to the Migration Industry</em>. Oct. 2017.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  <em>Io Capitano</em>. Directed by Matteo Garrone, 2024.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  Molenaar, Fransje, and Floor El Kamouni-Janssen. <em>Turning the Tide: The Politics of Irregular Migration in the Sahel and Libya</em>. Clingendael, Feb. 2017, <a href="https://www.clingendael.org/pub/2017/turning_the_tide/" target="_blank">https://www.clingendael.org/pub/2017/turning_the_tide/</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Sengupta, Somini. “Heat, Hunger and War Force Africans Onto a ‘Road on Fire.’” <em>The New York Times</em>, 15 Dec. 2016, <a href="https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html" target="_blank">https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html</a>.
+</p> 
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Simoncelli, Marco. “Agadez, Niger’s Gateway to the Sahara, Finds New Life in the Migrant Trade.” <em>Al Jazeera</em>, <a href="https://www.aljazeera.com/features/longform/2024/4/12/agadez-nigers-gateway-to-the-sahara-finds-new-life-in-the-migrant-trade" target="_blank">https://www.aljazeera.com/features/longform/2024/4/12/agadez-nigers-gateway-to-the-sahara-finds-new-life-in-the-migrant-trade</a>. Accessed 12 Dec. 2025.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+“The Perilous Migration across the Desert of Niger: Africa’s Hidden Story.” Oxfam International, 25 May 2022, <a href="https://www.oxfam.org/en/perilous-migration-across-desert-niger-africas-hidden-story" target="_blank">https://www.oxfam.org/en/perilous-migration-across-desert-niger-africas-hidden-story</a>.
+</p>
+
+</div>
+
+`,
+
+{
+    className: "agadez-popup-container",
+    maxWidth: 600,
+    minWidth: 100,
+    maxHeight: 900,
+    autoPan: true
+  }
+
+)
+  
+
+
+// TOUMMO BORDER CROSSING
+
+  // Add a marker
+  var marker = L.marker([22.649109, 14.184064]).addTo(map);
+
+  marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Toummo Border Crossing</b><br>
+  <p>Many migrants cross the Toummo border crossing when entering Libya. Here, the Nigerien transporters often leave the migrants, and they are picked up by Libyan transporters. Driving through the Libyan desert is no easy task. Transporters often get intercepted by armed groups and militias, who kidnap migrants, torture them, demand money, or sell them as slaves. In other cases, Libyan migration authorities intercept the convoys and place migrants in detention centers. There, many endure similar horrors to those seen in militia captivity (Simoncelli; Tinti).</p><br>
+ 
+  <div style="text-align:left;">
+    <img src="nigerien guard.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> A Nigerien National Guard at a checkpoint in Niger. Between 2015 and 2023, transporters drove along alternative routes to avoid getting caught. Migrants who fell off were left to die in the desert (Simoncelli).</small>
+  </div>
+
+  <p> </p>
+
+  <div style="text-align:left;">
+    <img src="agadez nyt.jpg" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> Migrants ride pickups through the desert of Niger (Sengupta).</small>
+  </div>
+
+ <p> </p>
+
+  <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+  <ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Sengupta, Somini. “Heat, Hunger and War Force Africans Onto a ‘Road on Fire.’” <em>The New York Times</em>, 15 Dec. 2016, World. NYTimes.com, <a href="https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html" target="_blank">https://www.nytimes.com/interactive/2016/12/15/world/africa/agadez-climate-change.html</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Simoncelli, Marco. “Agadez, Niger’s Gateway to the Sahara, Finds New Life in the Migrant Trade.” <em>Al Jazeera</em>, 12 April, 2024, <a href="https://www.aljazeera.com/features/longform/2024/4/12/agadez-nigers-gateway-to-the-sahara-finds-new-life-in-the-migrant-trade" target="_blank">https://www.aljazeera.com/features/longform/2024/4/12/agadez-nigers-gateway-to-the-sahara-finds-new-life-in-the-migrant-trade</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Tinti, Peter. <em>Tackling the Niger–Libya Migration Route: How Armed Conflict in Libya Shapes the Agadez Mobility Economy</em>. Royal Institute of International Affairs, 31 July 2024, <a href="https://doi.org/10.55317/9781784136024" target="_blank">https://doi.org/10.55317/9781784136024</a>.
+</p>
+
+`, {
+  maxWidth: 600,
+  minWidth: 500,
+  maxHeight: 900,
+  autoPan: true
+})
+
+
+
+
+
+
+
+// MIGRATION ROUTES IN LIBYA
+
+ // Add a marker
+  var marker = L.marker([27.058152, 18.258216]).addTo(map);
+
+    marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Migration Routes in Libya</b><br>
+  <p>Migrant movement across Libya makes up a complex network of migration routes. Di Maio et al. show that migrants often move with fellow nationals, toward areas of economic opportuntiy and less conflict (Di Maio et al.).</p><br>
+ 
+  <div style="text-align:left;">
+    <img src="spatial.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> (Di Maio et al.).</small>
+  </div>
+
+  <p> </p>
+  <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+  <ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  Di Maio, Michele, et al. “Migration in Libya: A Spatial Network Analysis.” World Development, vol. 163, Mar. 2023, p. 106139. ScienceDirect, <a href="https://doi.org/10.1016/j.worlddev.2022.106139" target="_blank"> https://doi.org/10.1016/j.worlddev.2022.106139 </a>
+  </p>
+</ul>
+
+`, {
+  maxWidth: 600,
+  minWidth: 500,
+  maxHeight: 900,
+  autoPan: true
+})
+  
+
+
+
+
+
+
+// DCIM DETENTION CENTERS
+
+ // Add a marker
+  var marker = L.marker([32.1194, 20.0868]).addTo(map);
+
+marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Migrant Stories</b><br>
+  <p> </p>
+  <b>“I want to die too much. I want. But I can’t… I want to die, but I cannot do it”</b> (Yeung).</b><br>
+  – Abrihet, 16, Eritrean migrant in DCIM detention center.</p>
+
+  <p>Women are regularly sexually abused and forced into prostitution when in captivity of militias and gangs. Many, scarred for life and traumatized, become suicidal (Yeung; Younes).</p>
+
+  <p>Despite knowing that the migratory journey is perilous (although often underestimating just how brutal it may be), migrants make an active choice to leave their home. Lack of economic opportunity, increasingly frequent floods and droughts, and various forms of political and religious violence push migrants to embark on a journey north. Therefore, repatriation is the worst possible outcome for many (Libya’s Slaves; Smith).</p>
+
+  <b>“They sell Africans over there”</b> (Smith 00:35).</b><br>
+  – Diaby Baba, Ivorian migrant repatriated to the Ivory Coast.</p>
+
+  <div style="text-align:left;">
+    <img src="victor.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> Victory, a Nigerian migrant held in DCIM detention ("I was sold", CNN) </small>
+  </div>
+
+
+ <p><b>“I spent my life savings leaving the country [Nigeria]… I go back and start back from square one. It’s very painful. It’s very painful…. We all have a dream, you understand? Hoping that when we get there, we achieve something” </b> (Libya’s Slaves 01:30).</b><br>
+  – Victory, 21, Nigerian migrant in DCIM detention center awaiting repatriation.</p>
+
+<hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+<ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Libya’s Slaves: ‘I Was Sold’ | CNN. Directed by Published 2:33 AM EST et al., 2017. www.cnn.com, <a href= "https://www.cnn.com/videos/world/2017/11/13/libya-migrant-slave-victory-lon-orig-md-ejk.cnn." target="_blank"> https://www.cnn.com/videos/world/2017/11/13/libya-migrant-slave-victory-lon-orig-md-ejk.cnn </a>
+    Acessed 11 Dec. 2025. </p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+ Smith, Bernard. “‘They Sell Africans over There’: Libya’s Slave Trade.” Al Jazeera, 28 November, 2017, 
+ <a href= " https://www.aljazeera.com/video/2017/11/28/they-sell-africans-over-there-libyas-slave-trade" target="_blank">  https://www.aljazeera.com/video/2017/11/28/they-sell-africans-over-there-libyas-slave-trade
+  </a> 
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+   Yeung, Mick Krever, Isobel. “How Traffickers Deep in the Sahara Are Extorting Ransom Payments from Refugees’ Families.” CNN, 6 Nov. 2025,
+   <a href= "https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd" target="_blank"> https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd
+    </a>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+  Younes, Ali. “African Refugees Bought, Sold and Murdered in Libya.” Al Jazeera, 29 November, 2017,
+  <a href= " https://www.aljazeera.com/news/2017/11/29/african-refugees-bought-sold-and-murdered-in-libya" target="_blank" >  https://www.aljazeera.com/news/2017/11/29/african-refugees-bought-sold-and-murdered-in-libya
+    </a> 
+
+
+`, {
+  maxWidth: 600,
+  minWidth: 500,
+  maxHeight: 900,
+  autoPan: true
+})
+
+
+
+
+
+
+
+// SABHA SLAVE TRADE
+
+  // Add a marker
+  var marker = L.marker([27.042765381982086, 14.420811150375503]).addTo(map);
+
+  // Add a popup
+marker.bindPopup(`
+  <p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b> Sabha, a Marketplace for Slave Trade </b><br>
+  <p> In Sabha, many migrants are held for ransom. When families can’t pay for their release, many are killed or just left to die. Other migrants are auctioned off and sold as slaves in private garages and car parks in the city. The town is a marketplace for the slave trade (Younes). Here, migrants are sold for a few hundred dollars, sometimes for as little as $400 (Abulhul). Many are tortured until they or their families can pay the ransom. Of those who can’t pay, many are killed (Yeung; Younes).</p>
+
+  <p><b>"My mistake was that I came to this country [Libya]” </b>(Sherlock).<br>
+-	Mohammed, Nigerien former slave who escaped. </p>
+
+ <div style="text-align:left;">
+    <img src="mohammed.png" style="width:100%; max-width:550px;"><br>
+    <small style="color:#555;"> Mohammed, a Nigerien migrant who escaped enslavement (Sherlock). </small>
+  </div>
+
+  <p>But who are the traffickers? Many of them were once migrants themselves. Just like in Agadez, where many migrants either stayed or returned to, many migrants end up staying in Libya, engaging in trafficking and facilitating the slave trade. These former migrants fill an important role in the trafficking of migrants by translating and communicating ransom demands to the migrants and their families, while also facilitating the transfer of ransom money. Sometimes, the migrants working for the militias and gangs may have once been trafficked themselves (Yeung; Io Capitano).</p>
+
+  <b>“I kept thinking, I'm a human being, just like him [captor]”</b> (Sherlock).<br>
+  – Mohammed, Nigerien former slave who escaped captivity and forced labor in Libya.</p>
+
+  <hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+<ul style="padding-left: 1em; margin:0; font-size:0.9em; line-height:1.4em;">
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Abulhul, Zeinab. “The Scandal of a Slave Market in Libya.” HRRC, 26 Mar. 2025, 
+<a href="https://www.humanrightsresearch.org/post/the-scandal-of-a-slave-market-in-libya" target="_blank">https://www.humanrightsresearch.org/post/the-scandal-of-a-slave-market-in-libya</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Io Capitano. Directed by Matteo Garrone, 2024.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Sherlock, Ruth. “Migrants Captured In Libya Say They End Up Sold As Slaves.” NPR, 21 Mar. 2018. Parallels. NPR, 
+<a href="https://www.npr.org/sections/parallels/2018/03/21/595497429/migrants-passing-through-libya-could-end-up-being-sold-as-slaves" target="_blank">https://www.npr.org/sections/parallels/2018/03/21/595497429/migrants-passing-through-libya-could-end-up-being-sold-as-slaves</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Yeung, Mick Krever, Isobel. “How Traffickers Deep in the Sahara Are Extorting Ransom Payments from Refugees’ Families.” CNN, 6 Nov. 2025,
+<a href="https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd" target="_blank">https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd</a>.
+</p>
+
+<p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+Younes, Ali. “African Refugees Bought, Sold and Murdered in Libya.” Al Jazeera, 29 November, 2017,
+<a href="https://www.aljazeera.com/news/2017/11/29/african-refugees-bought-sold-and-murdered-in-libya" target="_blank">https://www.aljazeera.com/news/2017/11/29/african-refugees-bought-sold-and-murdered-in-libya</a>. 
+</p>
+  </ul>
+
+
+`, {
+  maxWidth: 600,
+  minWidth: 500,
+  maxHeight: 900,
+  autoPan: true
+})
+
+
+
+
+
+// LIBYA COLONIAL VIOLENCE
+
+
+// Add a marker
+  var marker = L.marker([32.887759, 13.187009]).addTo(map);
+
+  // Add a popup
+marker.bindPopup(`
+
+<p style="font-size:1.5em; margin:0 0 0.5em 0;">
+  <b>Libya, the Hellish Arena for Slave Trade, Extortion and Continued Colonialist Violence</b>
+</p>
+
+<p> In 2011, Libya was thrown into disarray and endured a civil war. The Arab Spring resulted in the ousting of despot Gaddafi, but the turmoil also created a power vacuum and breeding grown for militias and gangs. In this lawless desert country, migrants fall victim to human trafficking, forced labor, and slave trade. The situation in the country is complex, and the distinction between legitimate authorities, militias, and criminal gangs is vague. In reality, all these groups collude, engage in criminal activity and constantly violate human rights. These groups make up a complex network of trafficking, forced labor, extortion, and slave trade (Abulhul; “Libya’s Dark Web of Collusion”).</p>
+
+<p> Migrants end up at the mercy of criminals in Libya in different ways. Some are captured and kidnapped immediately when they cross the Libya border. Many are tortured as the militiamen extort their families for money. Others are forced to work. Some are sold as slaves in open marketplaces. The fate of these migrants varies greatly. For the families of the migrants, the extortion sums are often astronomical. Many can’t afford to pay the ransom and end up selling much of what they own and taking on debt to free their loved ones. For many migrants whose families who can’t pay up, death awaits. Of those who are sold as slaves, some escape. They might make it out of Libya or get caught by Libyan authorities. Of those who remain in captivity, some are sold to other militias or gangs, and some are sold to slave owners, who force migrants to work on their property. Women often fare the worst, enduring forced prostitution and horrific sexual abuse (Yeung; Sherlock; Io Capitano).</p>
+
+<p> The General Directorate for Combating Illegal Migration (DCIM) is the government authority in Libya responsible for intercepting and combating smuggling, as well as preventing irregular migration. On paper, the DCIM’s mission is to rescue migrants trapped in traffickers’ economies of the slave trade and extortion. However, the reality is different. The DCIM itself is just as culpable of crimes against humanity as the militias operating in the Libyan desert. When the DCIM intercepts traffickers’ camps, warehouses, and slave markets, migrants are taken to detention centers. From there, some migrants are repatriated to their home countries, buy many are placed back into the system of the slave trade and extortion. DCIM officials torture, abuse, and extort migrants held in detention centers (Yeung; “Libya’s Dark Web of Collusion”; Abulhul; Sherlock; Romm).</p>
+
+<p> The DCIM, a division of the Ministry of the Interior, operates not only on behalf of the Libyan state but also on behalf of Italy. As immigration to Europe surged in the 2010s, European states sought to reduce the number of asylum-seekers arriving at their borders. In 2012, the European Court of Human Rights ruled it illegal to return migrants rescued at sea to Libya, since it was known that migrants were consistently tortured and ill-treated there. Thus, when European countries sought to reduce the number of migrants arriving at their borders, they were forced to look further down the migratory route. In February 2017, the Italian Government and Libyan governments signed a Memorandum of Understanding, which was adopted by the European Council in the Malta Accords. Italy and other EU governments and institutions agreed to provide technical support, assistance, and funding to Libyan authorities. The DCIM, among others, received support and funding to further combat clandestine migration and upgrade and maintain existing detention centers. In addition to funding government agencies, the Italian government also struck deals with militias, Tuareg tribes, and leaders of non-state groups in an effort to stem migratory flows through the country (“Libya’s Dark Web of Collusion”). </p>
+
+<p> The motivation of the 2012 ruling by the European Court of Human Rights indicates that EU member states were aware of the crimes against humanity migrants fall victim to in Libya. Thus, the Memorandum of Understanding signed into the Malta Accords displays a blatant attempt to circumvent human rights considerations and turn a blind eye to the brutal violence against migrants. By outsourcing migration control to Libya, Italy and EU members don’t have blood on their hands. But Italy and EU member states are the de facto perpetrators in these situations and are just as culpable as any Libyan entity that arbitrarily detains and tortures migrants, or any militia viciously extorting money and selling migrants as slaves. Not only are Italy and EU member states licensing these cycles of violence, but they are enabling them.</p>
+
+<p style="margin-left: 1.5em;">
+  “Before leaving, fear was growing inside me because I had heard stories of Libyans arresting people at sea and taking them to prison – and from there asking them to call their families to make them send money; and stories of people who had died in the sea. But I feared Libya more; in Libya they treat anyone with a dark skin as an animal…” <br>
+-	“Victor”, Nigerian migrant (“Libya’s Dark Web of Collusion”).
+</p>
+
+<p> In The Wretched of the Earth, Fanon writes about the compartmentalized world that is colonialism. It is a world characterized by violence and constant, inescapable opposition between the colonized and the colonizer. Written in the context of Algerian liberation struggles in the early 1960s, Fanon’s work centers around a settler-colonial society, where the colonizer and colonized violently clash, both physically and ideologically. The power imbalance is evident: </p>
+
+<p style="margin-left: 1.5em;">
+  “The colonist’s sector is a sector built to last, all stone and steel… They [the colonizer] are protected by solid shoes in a sector where streets are clean and smooth, without a pothole, without a stone… The colonized sector, or at least the “native” quarters, the shanty town, the Medina, the reservation, is a disreputable place inhabited by disreputable people. You are born anywhere, from anything. You die anywhere, from anything…” (Fanon 4).
+  </p>
+  
+<p> Today, the direct clash between the colonizer and the colonized no longer occurs. European states don’t officially colonize other nations. Still, the colonial violence lives on. Much of Europe’s narrative of a shared past has been cleared of the colonial legacy. Thus, a past of violence is obscured, and the effects of the European colonial enterprise go unacknowledged. But colonial practices don’t simply go away when the settler leaves. As highlighted in the case of Senegal, colonial practices are alive and well today (see Senegal essay). In Libya, colonial violence lives on via proxy. Viewing Fanon’s description of the divided colonial city as an analogy for today’s colonial violence, we see that Libya is indeed the solid shoe protecting the colonizer. The DCIM smooths the streets, militias fill the potholes, and gangs removes the stones. Libyan entities act on behalf of Italy and EU members to perpetuate the colonial practice that, simply put, is “naked violence” (Ravelli; Fanon).</p>
+
+<hr style="border:none;border-top:1px solid #ccc;margin:0.8em 0;">
+<div style="font-size:0.9em; line-height:1.4em;">
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Abulhul, Zeinab. “The Scandal of a Slave Market in Libya.” HRRC, 26 Mar. 2025,
+    <a href="https://www.humanrightsresearch.org/post/the-scandal-of-a-slave-market-in-libya" target="_blank">
+      https://www.humanrightsresearch.org/post/the-scandal-of-a-slave-market-in-libya
+    </a>.
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Fanon, Frantz. <em>The Wretched of the Earth</em>. Grove Press, 1961.
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    <em>Io Capitano</em>. Directed by Matteo Garrone, 2024.
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    “Libya’s Dark Web of Collusion: Abuses against Europe-Bound Refugees and Migrants.”
+    Amnesty International, 11 Dec. 2017,
+    <a href="https://www.amnesty.org/en/documents/mde19/7561/2017/en/" target="_blank">
+      https://www.amnesty.org/en/documents/mde19/7561/2017/en/
+    </a>.
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Ravelli, Galadriel. “Challenging the Displacement of Colonial Histories? Isolated
+    Memories of Colonial Deportations from Libya to Italy in Europe’s ‘Periphery.’”
+    <em>Cultural Studies</em>, vol. 0, no. 0, May 2025, pp. 1–33. Taylor and Francis+NEJM,
+    <a href="https://doi.org/10.1080/09502386.2025.2506443" target="_blank">
+      https://doi.org/10.1080/09502386.2025.2506443
+    </a>.
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Romm, Lauren. “Migrant Slave Trade in Libya | Research Starters | EBSCO Research.”
+    EBSCO, 2023, <a href="https://www.ebsco.com/research-starters/history/migrant-slave-trade-libya" target="_blank">https://www.ebsco.com/research-starters/history/migrant-slave-trade-libya</a>.
+    
+  </p>
+
+  <p style="margin:0 0 0.6em 0; padding-left:1.5em; text-indent:-1.5em;">
+    Sherlock, Ruth. “Migrants Captured In Libya Say They End Up Sold As Slaves.”
+    NPR, 21 Mar. 2018. Parallels. NPR,
+    <a href="https://www.npr.org/sections/parallels/2018/03/21/595497429/migrants-passing-through-libya-could-end-up-being-sold-as-slaves" target="_blank">
+      https://www.npr.org/sections/parallels/2018/03/21/595497429/migrants-passing-through-libya-could-end-up-being-sold-as-slaves
+    </a>.
+  </p>
+
+  <p style="margin:0; padding-left:1.5em; text-indent:-1.5em;">
+    Yeung, Mick Krever, Isobel. “How Traffickers Deep in the Sahara Are Extorting
+    Ransom Payments from Refugees’ Families.” CNN, 6 Nov. 2025,
+    <a href="https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd" target="_blank">
+      https://www.cnn.com/2025/11/06/africa/traffickers-sahara-torture-ransom-libya-intl-cmd
+    </a>.
+  </p>
+
+</div>
+
+
+
+`, {
+  maxWidth: 600,
+  minWidth: 500,
+  maxHeight: 900,
+  autoPan: true
+})
+
+</script>
+
+</body>
+</html>
